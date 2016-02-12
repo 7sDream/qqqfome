@@ -49,34 +49,41 @@ qqqfome -v init
 
 然后根据提示登录知乎。
 
-或者你使用过 `zhihu-py3` 的话，可以把 cookies 文件复制过来，省略登录步骤
+过程中需要验证码……如果你是在VPS上部署的话，你得想办法把 `captcha.gif` 文件从远程服务器弄到本地来查看验证码…… 
+
+其实我更建议在本地用 `zhihu-py3` 生成 cookies 再弄到 VPS 上，这样就可以使用：
 
 ```bash
 qqqfome -c /path/to/cookie -v init
 ```
+
+来省略登录步骤。
 
 如果一切正常的话，你会得到一个 sqlite 数据库文件。名字是 `<your-zhihu-id>.sqlite3`
 
 ### 启动
 
 ```bash
-qqqfome -m "Thank you follow me." -d start <your-zhihu-id>.sqlite3
+qqqfome -m $'I\'m {my_name}:\nThank you follow me.' -d start <your-zhihu-id>.sqlite3
 ```
 
 （如果只是测试的话，可以去掉 `-d` 参数，让他在前台模式运行。）
 
-`-m` 参数后跟需要发送的信息。
+`-m` 参数后跟需要发送的信息。注意，如果你在消息内部使用了转义字符，那么单引号前的`$`符号是必需的。
 
 或者你可以将信息写在一个文件里，然后使用 `-M` 参数指定此文件。
 
 两个都没有指定的话，默认的消息是：
 
 ```text
-谢谢你关注我！
+你好{your_name}，我是{my_name}，谢谢你关注我，你是我的第{follower_num}号关注者哟！
 
 本消息由qqqfome项目自动发送。
 项目地址：https://github.com/7sDream/qqqfome
+{time}
 ```
+
+程序支持的也就是例子里的这几个宏了……
 
 ## 查看Log
 

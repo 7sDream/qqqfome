@@ -1,4 +1,5 @@
 import time
+import datetime
 import logging
 
 from . import daemon
@@ -9,8 +10,14 @@ from . import strings as s
 from zhihu import ZhihuClient
 
 
-def calc_message(pattern):
-    return pattern
+def calc_message(pattern, me, you, new_follower_num):
+    now = datetime.datetime.now()
+    my_name = me.name
+    follower_num = me.follower_num - new_follower_num
+    your_name = you.name
+
+    return pattern.format(now=now, my_name=my_name,
+                          follower_num=follower_num, your_name=your_name)
 
 
 class BackendCode(daemon.DaemonProcess):
@@ -75,6 +82,7 @@ class BackendCode(daemon.DaemonProcess):
             db.log_to_db(conn, follower_num, s.log_start_a_pass)
 
             continue_in_db = 0
+            new_follower_num = 0
             for follower in me.followers:
                 L.info(s.log_check_follower.format(follower.name, follower.id))
                 if db.is_in_db(conn, follower.id):
@@ -86,7 +94,12 @@ class BackendCode(daemon.DaemonProcess):
 
                     L.info(s.log_send_message.format(follower.name))
 
-                    message = calc_message(msg)
+                    try:
+                        message = calc_message(msg, me, follower,
+                                               new_follower_num)
+                    except Exception as e:
+                        L.exception(e)
+                        message = msg
 
                     L.debug(message)
 
@@ -94,6 +107,7 @@ class BackendCode(daemon.DaemonProcess):
                     while i < 5:
                         try:
                             me.send_message(follower, message)
+                            new_follower_num += 1
                             L.info(s.success)
                             L.info(s.log_add_user_to_db.format(follower.name))
                             db.add_user_to_db(conn, follower)

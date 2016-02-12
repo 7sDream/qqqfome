@@ -103,7 +103,6 @@ def main():
     parser.add_argument('file', help=s.cmd_help_file, type=str,
                         action=SetDefaultPID, nargs='?')
 
-
     args = parser.parse_args()
 
     # Logger settings
