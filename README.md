@@ -83,6 +83,37 @@ qqqfome stop <sqlite_file_name>
 
 还没写，暂时用 `qqqfome -h` 凑合看吧。
 
+```text
+usage: qqqfome [-h] [-v] [-c FILE] [-p FILE] [-l FILE] [-t INTERVAL]
+               [-m MESSAGE | -M FILE] [-s NUM] [-d]
+               {init,start,stop} [file]
+
+Thank-you-follow-me cli.
+
+positional arguments:
+  {init,start,stop}     command that you want exec
+  file                  database file that you want run on.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --verbose         turn on this to print info
+  -c FILE, --cookies FILE
+                        provide cookies file if you have to skip login
+  -p FILE, --pid-file FILE
+                        pid file location
+  -l FILE, --log-file FILE
+                        log file location
+  -t INTERVAL, --time INTERVAL
+                        set the interval time
+  -m MESSAGE, --message MESSAGE
+                        the message that you want to send to your new follower
+  -M FILE, --message-file FILE
+                        the message that you want to send to your new follower
+  -s NUM, --stop-at NUM
+                        found NUM continuously old followers will stop pass
+  -d, --daemon          work in daemon mode
+```
+
 ## LICENSEE
 
 MIT.
