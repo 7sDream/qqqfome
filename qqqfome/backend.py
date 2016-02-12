@@ -11,12 +11,13 @@ from zhihu import ZhihuClient
 
 
 def calc_message(pattern, me, you, new_follower_num):
-    now = datetime.datetime.now()
+    offset = datetime.timedelta(hour=8)
+    china_now = datetime.datetime.utcnow() + offset
     my_name = me.name
     follower_num = me.follower_num - new_follower_num
     your_name = you.name
 
-    return pattern.format(now=now, my_name=my_name,
+    return pattern.format(now=china_now, my_name=my_name,
                           follower_num=follower_num, your_name=your_name)
 
 
