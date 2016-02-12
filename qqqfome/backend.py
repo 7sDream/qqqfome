@@ -84,43 +84,49 @@ class BackendCode(daemon.DaemonProcess):
 
             continue_in_db = 0
             new_follower_num = 0
-            for follower in me.followers:
-                L.info(s.log_check_follower.format(follower.name, follower.id))
-                if db.is_in_db(conn, follower.id):
-                    L.info(s.log_follower_in_db.format(follower.id))
-                    continue_in_db += 1
-                else:
-                    L.info(s.log_follower_not_in_db.format(follower.name))
-                    continue_in_db = 0
 
-                    L.info(s.log_send_message.format(follower.name))
+            try:
+                for follower in me.followers:
+                    L.info(s.log_check_follower.format(
+                        follower.name, follower.id))
+                    if db.is_in_db(conn, follower.id):
+                        L.info(s.log_follower_in_db.format(follower.id))
+                        continue_in_db += 1
+                    else:
+                        L.info(s.log_follower_not_in_db.format(follower.name))
+                        continue_in_db = 0
 
-                    try:
-                        message = calc_message(msg, me, follower,
-                                               new_follower_num)
-                    except Exception as e:
-                        L.exception(e)
-                        message = msg
+                        L.info(s.log_send_message.format(follower.name))
 
-                    L.debug(message)
-
-                    i = 0
-                    while i < 5:
                         try:
-                            me.send_message(follower, message)
-                            new_follower_num += 1
-                            L.info(s.success)
-                            L.info(s.log_add_user_to_db.format(follower.name))
-                            db.add_user_to_db(conn, follower)
-                            break
+                            message = calc_message(msg, me, follower,
+                                                   new_follower_num)
                         except Exception as e:
                             L.exception(e)
-                            L.debug(s.log_send_failed)
-                        i += 1
+                            message = msg
 
-                if continue_in_db == max_old:
-                    L.info(s.log_continue_reach_max.format(max_old))
-                    break
+                        L.debug(message)
+
+                        i = 0
+                        while i < 5:
+                            try:
+                                me.send_message(follower, message)
+                                new_follower_num += 1
+                                L.info(s.success)
+                                L.info(s.log_add_user_to_db.format(
+                                    follower.name))
+                                db.add_user_to_db(conn, follower)
+                                break
+                            except Exception as e:
+                                L.exception(e)
+                                L.debug(s.log_send_failed)
+                            i += 1
+
+                    if continue_in_db == max_old:
+                        L.info(s.log_continue_reach_max.format(max_old))
+                        break
+            except Exception as e:
+                L.exception(e)
 
             L.info(s.log_finish_a_pass)
             time.sleep(interval)
