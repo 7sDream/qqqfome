@@ -10,27 +10,12 @@
 - 用 `sqlite` 数据库保存老的关注者
 - `daemon.py` 用于在 *unix 环境下创建 daemon proc
 
-## 安装
-
-未发布到 pypi， 暂时使用源码安装吧。
-
-### 下载源码包
-
-```bash
-git clone https://github.com/7sDream/qqqfome
-cd qqqfome
-```
-
-### 简单测试
-
-```bash
-python3 -m unittest qqqfome.test
-```
+## 使用
 
 ### 安装
 
 ```bash
-sudo python3 setup.py install
+sudo python3 install qqqfome
 ```
 
 ### 创建工作目录
