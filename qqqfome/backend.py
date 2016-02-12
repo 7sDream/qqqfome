@@ -86,7 +86,7 @@ class BackendCode(daemon.DaemonProcess):
 
                     L.info(s.log_send_message.format(follower.name))
 
-                    message = calc_message(message)
+                    message = calc_message(msg)
 
                     L.debug(message)
 
