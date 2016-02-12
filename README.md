@@ -125,6 +125,15 @@ optional arguments:
   -d, --daemon          work in daemon mode
 ```
 
+## TODO
+
+- 增加 update 命令，用于更新数据库里的 cookies
+- 选项 `--mc` 或者类似的东西，用于随机从文件中选取一段文本（一行，或者以特定分隔符分隔的一段）用作 message。
+- 写个教程
+- 完善 readme 和 文档
+- 重构代码
+- 写测试
+
 ## LICENSEE
 
 MIT.
