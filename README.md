@@ -6,9 +6,9 @@
 
 技术栈什么的非常简单：
 
-- 以前写的 zhihu-py3 用于获取知乎信息
-- 用 sqlite 数据库保存老的关注者
-- daemon.py 用于在 *unix 环境下创建 daemon proc
+- 以前写的 `zhihu-py3` 用于获取知乎信息
+- 用 `sqlite` 数据库保存老的关注者
+- `daemon.py` 用于在 *unix 环境下创建 daemon proc
 
 ## 安装
 
@@ -49,18 +49,18 @@ qqqfome -v init
 
 然后根据提示登录知乎。
 
-或者你使用过 zhihu-py3 的话，可以把 cookies 文件复制过来，省略登录步骤
+或者你使用过 `zhihu-py3` 的话，可以把 cookies 文件复制过来，省略登录步骤
 
 ```bash
 qqqfome -c /path/to/cookie -v init
 ```
 
-如果一切正常的话，你会得到一个 sqlite 数据库文件。
+如果一切正常的话，你会得到一个 sqlite 数据库文件。名字是 `<your-zhihu-id>.sqlite3`
 
 ### 启动
 
 ```bash
-qqqfome -m "Thank you follow me." -d start <sqlite_file_name> 
+qqqfome -m "Thank you follow me." -d start <your-zhihu-id>.sqlite3
 ```
 
 （如果只是测试的话，可以去掉 -d 参数，让他在前台模式运行。）
@@ -69,9 +69,19 @@ qqqfome -m "Thank you follow me." -d start <sqlite_file_name>
 
 或者你可以将信息写在一个文件里，然后使用 `-M` 参数指定此文件。
 
+## 查看Log
+
+```bash
+tail -f <your-zhihu-id>.sqlite3.log
+```
+
+默认的 log 文件名是 `<your-zhihu-id>.sqlite3.log`
+
+还有一个是 `<your-zhihu-id>.sqlite3.pid` 这个文件不要删。
+
 ### 停止
 
-如果不是后台模式，Ctrl-C 即可停止。
+如果不是后台模式，`Ctrl-C` 即可停止。
 
 如果是 Daemon 模式，则：
 
