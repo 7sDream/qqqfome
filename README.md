@@ -63,11 +63,20 @@ qqqfome -c /path/to/cookie -v init
 qqqfome -m "Thank you follow me." -d start <your-zhihu-id>.sqlite3
 ```
 
-（如果只是测试的话，可以去掉 -d 参数，让他在前台模式运行。）
+（如果只是测试的话，可以去掉 `-d` 参数，让他在前台模式运行。）
 
--m 参数后跟需要发送的信息。
+`-m` 参数后跟需要发送的信息。
 
 或者你可以将信息写在一个文件里，然后使用 `-M` 参数指定此文件。
+
+两个都没有指定的话，默认的消息是：
+
+```text
+谢谢你关注我！
+
+本消息由qqqfome项目自动发送。
+项目地址：https://github.com/7sDream/qqqfome
+```
 
 ## 查看Log
 
