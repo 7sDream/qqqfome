@@ -11,7 +11,7 @@ from zhihu import ZhihuClient
 
 
 def calc_message(pattern, me, you, new_follower_num):
-    offset = datetime.timedelta(hour=8)
+    offset = datetime.timedelta(hours=8)
     china_now = datetime.datetime.utcnow() + offset
     my_name = me.name
     follower_num = me.follower_num - new_follower_num
