@@ -80,7 +80,7 @@ qqqfome -m $'I\'m {my_name}:\nThank you follow me.' -d start <your-zhihu-id>.sql
 
 本消息由qqqfome项目自动发送。
 项目地址：https://github.com/7sDream/qqqfome
-{time}
+{now}
 ```
 
 程序支持的也就是例子里的这几个宏了……

@@ -9,7 +9,7 @@
   "cmd_help_log_file": "log file location",
   "cmd_help_message": "the message that you want to send to your new follower",
   "cmd_help_stop_at": "found NUM continuously old followers will stop  pass",
-  "default_message": "你好{your_name}，现在是{time}，谢谢你关注我，你是我的第{follower_num}号关注者哟！\\n\\n本消息由qqqfome项目自动发送。\\n项目地址：https://github.com/7sDream/qqqfome",
+  "default_message": "你好{your_name}，我是{my_name}，谢谢你关注我，你是我的第{follower_num}号关注者哟！\\n\\n本消息由qqqfome项目自动发送。\\n项目地址：https://github.com/7sDream/qqqfome\\n{now}",
   "cmd_help_time": "set the interval time",
   "cmd_help_no_file_error": "need database filename when you want to {0}.",
   "log_get_user_id": "Calc file name from user id: {0}.",
