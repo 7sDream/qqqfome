@@ -71,14 +71,29 @@ class BackendCode(daemon.DaemonProcess):
         while True:
             L.info(s.log_start_a_pass)
 
-            try:
-                me = client.me()
-                L.info(s.log_build_me)
-            except Exception as e:
-                L.exception(e)
+            i = 0
+            while i < 5:
+                try:
+                    L.info(s.log_build_me)
+                    me = client.me()
+                    break
+                except Exception as e:
+                    L.exception(e)
+                    i += 1
+            else:
+                L.error(s.log_fail_to_build_me)
+                L.info(s.exit)
                 return
 
-            follower_num = me.follower_num
+            try:
+                follower_num = me.follower_num
+            except Exception as e:
+                L.exception(e)
+                L.info(s.log_get_follower_num_failed)
+                L.info(s.log_finish_a_pass)
+                time.sleep(interval)
+                continue
+
             L.info(s.log_get_follower_num.format(follower_num))
             db.log_to_db(conn, follower_num, s.log_start_a_pass)
 
