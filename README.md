@@ -15,7 +15,7 @@
 ### 安装
 
 ```bash
-sudo python3 install qqqfome
+sudo pip3 install qqqfome
 ```
 
 ### 创建工作目录
