@@ -37,6 +37,7 @@
   "log_continue_reach_max": "{0} continuously old followers found, stop.",
   "log_send_message": "Send message to {0}.",
   "log_send_failed": "Send Failed, retry...",
+  "log_send_pass": "Send failed more than 5 time, pass.",
   "success": "Success.",
   "failed": "Failed.",
   "exit": "Exit.",

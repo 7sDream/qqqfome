@@ -116,6 +116,7 @@ class BackendCode(daemon.DaemonProcess):
                         try:
                             message = calc_message(msg, me, follower,
                                                    new_follower_num)
+                            new_follower_num += 1
                         except Exception as e:
                             L.exception(e)
                             message = msg
@@ -126,16 +127,19 @@ class BackendCode(daemon.DaemonProcess):
                         while i < 5:
                             try:
                                 me.send_message(follower, message)
-                                new_follower_num += 1
-                                L.info(s.success)
-                                L.info(s.log_add_user_to_db.format(
-                                    follower.name))
-                                db.add_user_to_db(conn, follower)
                                 break
                             except Exception as e:
                                 L.exception(e)
                                 L.debug(s.log_send_failed)
-                            i += 1
+                                i += 1
+                        else:
+                            L.info(s.log_send_pass)
+                            continue
+
+                        L.info(s.success)
+                        L.info(s.log_add_user_to_db.format(
+                            follower.name))
+                        db.add_user_to_db(conn, follower)
 
                     if continue_in_db == max_old:
                         L.info(s.log_continue_reach_max.format(max_old))
